@@ -1,4 +1,4 @@
-FROM php:8.0.1-fpm
+FROM php:8.0.3-fpm
 
 ARG UID
 
@@ -9,7 +9,7 @@ RUN chown -R appuser:appuser /home/appuser/
 RUN echo "StrictHostKeyChecking no" >> /home/appuser/.ssh/config
 RUN echo "export COLUMNS=300" >> /home/appuser/.bashrc
 RUN echo "alias sf=/appdata/www/bin/console" >> /home/appuser/.bashrc
-RUN echo "alias art=php artisan" >> /home/appuser/.bashrc
+RUN echo "alias art='php artisan'" >> /home/appuser/.bashrc
 
 # Install packages and PHP extensions
 RUN apt update \

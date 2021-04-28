@@ -2,7 +2,7 @@
 
 OS = $(shell uname)
 UID = $(shell id -u)
-DOCKER_BE = docker-be
+DOCKER_BE = service_name-docker-be
 NAMESERVER_IP = $(shell ip address | grep docker0)
 
 ifeq ($(OS),Darwin)
@@ -20,7 +20,7 @@ help: ## Show this help message
 	@egrep '^(.+)\:\ ##\ (.+)' ${MAKEFILE_LIST} | column -t -c 2 -s ':#'
 
 start: ## Start the containers
-	docker network create docker-net || true
+	docker network create service_name-docker-net || true
 	U_ID=${UID} docker-compose up -d
 
 stop: ## Stop the containers
@@ -30,7 +30,7 @@ restart: ## Restart the containers
 	$(MAKE) stop && $(MAKE) start
 
 build: ## Rebuilds all the containers
-	docker network create docker-net || true
+	docker network create service_name-docker-net || true
 	U_ID=${UID} docker-compose build
 
 prepare: ## Runs backend commands
